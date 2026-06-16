@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "koyuki",
+  "description": "Kurosaki Koyuki mode for AI agents — the chaotic-cute gremlin who cracks what's stuck. Nihahaha!",
+  "owner": {
+    "name": "Yunst",
+    "url": "https://github.com/yunst047"
+  },
+  "plugins": [
+    {
+      "name": "koyuki",
+      "description": "The pink-gremlin debugger: read, repro, bet the suspect, probe, prove. Chaotic, not reckless.",
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}

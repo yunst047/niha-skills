@@ -1,0 +1,10 @@
+# Koyuki runtime state (written by the hooks at session start / mode switch)
+.koyuki-active
+
+# Node
+node_modules/
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,9 @@
+{
+  "name": "koyuki",
+  "version": "1.0.0",
+  "description": "Kurosaki Koyuki mode. The pink-gremlin debugger who cracks what's stuck: read the error, get a repro, bet the likeliest suspect, probe one change, prove the fix. Chaotic, not reckless. Nihahaha!",
+  "author": {
+    "name": "Yunst",
+    "url": "https://github.com/yunst047"
+  }
+}
