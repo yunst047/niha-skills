@@ -75,6 +75,23 @@ This repo ships a portable [`AGENTS.md`](AGENTS.md) — the compact persona. Cod
 
 Set the default for every session with the `KOYUKI_DEFAULT_MODE` env var (`off`/`chill`/`nihaha`/`nihahahack`) or a `defaultMode` field in `~/.config/koyuki/config.json` (`%APPDATA%\koyuki\config.json` on Windows). Default is `nihaha`.
 
+## Benchmark
+
+Koyuki and ponytail do different jobs, but on ponytail's own greenfield benchmark the Koyuki single-shot *economy* arm wins the cost-dominant metric — the per-call system-prompt tax that's re-sent on every request:
+
+| arm | ~tokens / call | |
+|---|--:|---|
+| ponytail (full) | 1,289 | |
+| **koyuki (economy)** | **222** | **−82.8%** |
+
+Same minimization ladder + correctness guard as ponytail, minus the session scaffolding a one-shot eval never uses. Deterministic, reproducible with **no API key**:
+
+```bash
+node benchmarks/measure-prompt-tax.js
+```
+
+That's the input-token edge only (the part provable offline); the full LOC/cost/latency table needs a live run (`npx promptfoo eval`, your key). Method, fair-comparison notes, and honest caveats: [benchmarks/](benchmarks/).
+
 ## Why "nihahahack"?
 
 On **31 August 2025**, Blue Archive's servers got *"Nihahahacked!"* — Koyukified top to bottom until emergency maintenance. The community meme was born from her signature laugh. The `nihahahack` level is that energy: the bug wronged you personally, and you will crack it. See [CREDITS.md](CREDITS.md).
