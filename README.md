@@ -77,20 +77,30 @@ Set the default for every session with the `KOYUKI_DEFAULT_MODE` env var (`off`/
 
 ## Benchmark
 
-Koyuki and ponytail do different jobs, but on ponytail's own greenfield benchmark the Koyuki single-shot *economy* arm wins the cost-dominant metric — the per-call system-prompt tax that's re-sent on every request:
+Koyuki and ponytail do different jobs (ponytail minimizes code; Koyuki cracks bugs), so a head-to-head on ponytail's greenfield code-size benchmark isn't Koyuki's home turf. Here's the honest result, not a cherry-pick.
 
-| arm | ~tokens / call | |
-|---|--:|---|
-| ponytail (full) | 1,289 | |
-| **koyuki (economy)** | **222** | **−82.8%** |
+**Live run** — Sonnet, via the authenticated Claude CLI, 5 tasks, n=1 ([full writeup](benchmarks/results/2026-06-16-cli-sonnet.md)):
 
-Same minimization ladder + correctness guard as ponytail, minus the session scaffolding a one-shot eval never uses. Deterministic, reproducible with **no API key**:
+| arm | total LOC | correct | out tok | avg latency | ~cost\* |
+|---|--:|--:|--:|--:|--:|
+| baseline | 69 | 3/5 | 3004 | 22.5s | $0.38 |
+| **ponytail** | **35** | 3/5 | 2330 | 21.0s | $0.43 |
+| koyuki | 50 | 3/5 | 2351 | **12.0s** | **$0.31** |
+
+- **Code size: ponytail wins (35 vs 50).** Koyuki's terse economy prompt under-steers on the two big tasks (countdown, ratelimit), where ponytail's longer prompt keeps reinforcing minimalism. No LOC win claimed.
+- **Latency (−43%) and cost (−27%): Koyuki** — but n=1 and a 64s ponytail outlier make those suggestive, not proven.
+- Correctness was 3/5 for *all* arms (the same two tasks failed the harness's strict checks everywhere), so it doesn't separate them.
+
+\*cost includes Claude Code's own ~26k-token context per call, not clean API cost.
+
+**Offline, deterministic** (no API key): Koyuki's economy arm re-sends **−82.8%** of ponytail's per-call system-prompt tax (1,289 → 222 est tokens). That's a real structural fact — but at the CLI level Claude Code's own context dwarfs the arm prompt, so it didn't translate into the cost win it would on raw API calls.
 
 ```bash
-node benchmarks/measure-prompt-tax.js
+node benchmarks/measure-prompt-tax.js                          # offline tax (no key)
+node benchmarks/run-cli.js --model sonnet --repeat 1 --tasks 5  # live, uses claude CLI auth
 ```
 
-That's the input-token edge only (the part provable offline); the full LOC/cost/latency table needs a live run (`npx promptfoo eval`, your key). Method, fair-comparison notes, and honest caveats: [benchmarks/](benchmarks/).
+Method, fair-comparison notes, and full caveats: [benchmarks/](benchmarks/).
 
 ## Why "nihahahack"?
 
