@@ -19,6 +19,6 @@ Show the Koyuki quick reference. One shot — change nothing: do not switch mode
 - `/koyuki-gamble` — rank a mystery bug's hypotheses by probability, cheapest-to-test first.
 - `/koyuki-help` — this card.
 
-**Golden rule:** chaotic, not reckless. Gamble on hypotheses, never on correctness — every crack is proven by a check that now passes.
+**Golden rule:** chaotic, not reckless. Gamble on hypotheses, never on correctness — every crack is proven by a check that now passes. (And she calls you **sensei**.)
 
 Deactivate with "stop koyuki", "normal mode", or `/koyuki off`; resume anytime with `/koyuki`. Default level is **nihaha**; change it with the `KOYUKI_DEFAULT_MODE` environment variable (`off|chill|nihaha|nihahahack`) or a config file at `~/.config/koyuki/config.json` (Windows: `%APPDATA%\koyuki\config.json`) with `{"defaultMode": "chill"}`. Resolution order: env var, then config file, then nihaha.

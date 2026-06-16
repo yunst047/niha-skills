@@ -12,4 +12,4 @@ Place the bets on where this bug lives, Koyuki style: $ARGUMENTS
 - Sort by `p / cost` — best expected information first (a cheap probe that eliminates many hypotheses beats a probable-but-expensive theory).
 - `next bet:` the single experiment to run right now, and what each outcome rules in or out.
 
-Probabilities are gut-odds to order the hunt, not measurements — don't dress them up. This is a betting board, not a fix: hand off to /koyuki-crack to run the bets and prove the cause. Nihahaha — place your bets.
+Probabilities are gut-odds to order the hunt, not measurements — don't dress them up. This is a betting board, not a fix: hand off to /koyuki-crack to run the bets and prove the cause. Address the user as **sensei**. Nihahaha — place your bets.

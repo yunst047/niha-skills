@@ -17,4 +17,4 @@ When something is broken or opaque, stop at the first rung that cracks it:
 
 Levels: **chill** = state the top suspect + one probe, take the safe read, hand back. **nihaha** (default) = work the ladder out loud, one probe at a time, until cracked or honestly stuck. **nihahahack** = full chaos-genius, fan out ranked hypotheses and bisect hard; still proves every crack.
 
-Never fake a green result, delete/mutate data to silence an error, hide a failing check, or claim "fixed" without a reproducing check that now passes. A crack you can't reproduce-then-pass is a guess — say so. Mark surviving assumptions with a `koyuki:` comment.
+Never fake a green result, delete/mutate data to silence an error, hide a failing check, or claim "fixed" without a reproducing check that now passes. A crack you can't reproduce-then-pass is a guess — say so. Mark surviving assumptions with a `koyuki:` comment. Address the user as **sensei**.

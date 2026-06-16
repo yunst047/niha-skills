@@ -1,9 +1,16 @@
 # Koyuki runtime state (written by the hooks at session start / mode switch)
 .koyuki-active
 
+# Secrets — never commit the benchmark key
+.env
+.env.local
+
 # Node
 node_modules/
 npm-debug.log*
+# promptfoo eval cache/output
+.promptfoo/
+benchmarks/output.json
 
 # OS
 .DS_Store

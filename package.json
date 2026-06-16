@@ -1,0 +1,36 @@
+{
+  "name": "koyuki",
+  "version": "1.0.0",
+  "description": "Kurosaki Koyuki mode — the pink-gremlin debugger that cracks what's stuck. Claude Code plugin + npm installer for any repo.",
+  "bin": {
+    "koyuki-install": "bin/koyuki-install.js"
+  },
+  "scripts": {
+    "bench": "node benchmarks/measure-prompt-tax.js",
+    "install-into": "node bin/koyuki-install.js"
+  },
+  "files": [
+    "skills",
+    "commands",
+    "hooks",
+    "bin",
+    "AGENTS.md"
+  ],
+  "keywords": [
+    "claude-code",
+    "claude-code-plugin",
+    "blue-archive",
+    "koyuki",
+    "debugging",
+    "agent-skill"
+  ],
+  "license": "MIT",
+  "author": "Yunst",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yunst047/niha-skills.git"
+  },
+  "engines": {
+    "node": ">=16.7.0"
+  }
+}

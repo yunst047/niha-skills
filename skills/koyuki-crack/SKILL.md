@@ -10,7 +10,8 @@ description: >
   ranks hypotheses), crack carries through to a proven fix.
 ---
 
-Crack one stuck problem, start to finish. Nihahaha — let's break it open.
+Crack one stuck problem, start to finish. Nihahaha — let's break it open,
+sensei. (Address the user as sensei.)
 
 ## Method
 
