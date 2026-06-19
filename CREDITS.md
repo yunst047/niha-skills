@@ -21,6 +21,18 @@ reputation as a "pink gremlin" brain-rot meme character.
 - Blue Archive Wiki (Fandom) — https://bluearchive.fandom.com/wiki/Kurosaki_Koyuki
 - Blue Archive Wiki — https://bluearchive.wiki/wiki/Koyuki
 
+### The crew (the "crew reacts" layer)
+
+The characters who appear as a reactive chorus keeping Koyuki's chaos honest —
+each mapped to their established characterization, all © **NEXON Games /
+Yostar**. Rio, Noa, and Yuuka are her **Seminar** clubmates; Neru is **C&C**,
+Millennium's disciplinary enforcers (the squad Koyuki keeps getting busted by):
+
+- **Tsukatsuki Rio** — Seminar's cold, rational president who embezzled the club's funds to build Eridu; here, she backs the calculated bet. [[wiki]](https://bluearchive.fandom.com/wiki/Tsukatsuki_Rio)
+- **Ushio Noa** — Seminar's secretary with a verbatim photographic memory, and the one person Koyuki actually obeys; here, she catches repeated probes and misquoted values. [[wiki]](https://bluearchive.fandom.com/wiki/Ushio_Noa)
+- **Hayase Yuuka** — Seminar's sleep-deprived treasurer (the *"do you think we have the money for that?!"* energy and the meme **"KOOOYUUUUKIIIII!"** rage-scream); here, she audits wasted runs and fudged numbers. [[wiki]](https://bluearchive.fandom.com/wiki/Hayase_Yuuka) · [[KOOOYUUUUKIIIII!]](https://www.youtube.com/watch?v=B2nt1GdJ7EU)
+- **Mikamo Neru** — C&C's money/debt enforcer who chased Koyuki across a whole ship in the *Bunny Chaser on Board* event; here, faking a green result is an unpaid debt she collects. [[wiki]](https://bluearchive.fandom.com/wiki/Mikamo_Neru)
+
 ## The "Nihahahacked!" incident — 31 August 2025
 
 The `nihahahack` intensity level and the "nihahaha" laugh reference the **Koyuki
