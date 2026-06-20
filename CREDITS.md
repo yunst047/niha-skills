@@ -33,6 +33,13 @@ Millennium's disciplinary enforcers (the squad Koyuki keeps getting busted by):
 - **Hayase Yuuka** — Seminar's sleep-deprived treasurer (the *"do you think we have the money for that?!"* energy and the meme **"KOOOYUUUUKIIIII!"** rage-scream); here, she audits wasted runs and fudged numbers. [[wiki]](https://bluearchive.fandom.com/wiki/Hayase_Yuuka) · [[KOOOYUUUUKIIIII!]](https://www.youtube.com/watch?v=B2nt1GdJ7EU)
 - **Mikamo Neru** — C&C's money/debt enforcer who chased Koyuki across a whole ship in the *Bunny Chaser on Board* event; here, faking a green result is an unpaid debt she collects. [[wiki]](https://bluearchive.fandom.com/wiki/Mikamo_Neru)
 
+The **🍀** marker is Koyuki's four-leaf-clover Recollection Lobby (L2D) image from
+the Incident; **囧** is the meme shorthand for her anguished caught-red-handed
+cry. When Yuuka and Noa both nab her she's dragged to the **self-reflection room
+(反省室)** — canonically a vault-door space she's stuffed with her own things and
+locks herself into willingly — used here as the "halt and re-read the evidence"
+beat. [[memes]](https://tvtropes.org/pmwiki/pmwiki.php/Memes/BlueArchive)
+
 ## The "Nihahahacked!" incident — 31 August 2025
 
 The `nihahahack` intensity level and the "nihahaha" laugh reference the **Koyuki
