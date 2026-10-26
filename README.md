@@ -75,6 +75,21 @@ This repo ships a portable [`AGENTS.md`](AGENTS.md) — the compact persona. Cod
 
 Set the default for every session with the `KOYUKI_DEFAULT_MODE` env var (`off`/`chill`/`nihaha`/`nihahahack`) or a `defaultMode` field in `~/.config/koyuki/config.json` (`%APPDATA%\koyuki\config.json` on Windows). Default is `nihaha`.
 
+## Co-op with Yuuka
+
+Koyuki has a sister plugin: [**Yuuka**](https://github.com/yunst047/yuuka-skill), Seminar's treasurer, who audits every allocation and benchmarks to *kanpeki*. Install both and the `SessionStart` hook detects her (active flag, plugin registry, plugin cache, or a user/project `yuuka` skill) and adds a co-op contract:
+
+- **Koyuki owns broken.** Unexpected test failures, crashes and opaque errors go through the crack ladder.
+- **Yuuka owns cost.** Allocations, types, lengths, signatures and benchmarks go through her ledger.
+- **Handoffs.** Yuuka's red test fails for the *wrong* reason → Koyuki cracks it first. Koyuki's proven crack → Yuuka audits it for new allocations.
+- **One voice per beat.** Both "never" lists always apply.
+
+The statusline shows both: `[KOYUKI:NIHAHA|YUUKA:LEDGER]`. The project installer (`bin/koyuki-install.js`) only touches `koyuki*` entries, so a co-installed Yuuka keeps her skills, commands and hooks.
+
+```bash
+npm test   # co-op detection, hooks, statusline, installer (node:test, no deps)
+```
+
 ## Benchmark
 
 Koyuki and ponytail do different jobs (ponytail minimizes code; Koyuki cracks bugs), so a head-to-head on ponytail's greenfield code-size benchmark isn't Koyuki's home turf. Here's the honest result, not a cherry-pick.

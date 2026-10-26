@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // Shared Koyuki instruction builder for the Claude hooks.
 // Reads the always-on persona from skills/koyuki/SKILL.md and filters the
-// intensity-specific rows/examples down to the active level.
+// intensity-specific rows/examples down to the active level. Appends the
+// co-op contract when Yuuka (yuuka-skill) is detected on the machine.
 
 const fs = require('fs');
 const path = require('path');
@@ -14,6 +15,14 @@ const LABEL = {
   lite: 'chill',
   full: 'nihaha',
   ultra: 'nihahahack',
+};
+
+const YUUKA_LABEL = {
+  lite: 'allowance',
+  full: 'ledger',
+  ultra: 'deficit',
+  audit: 'audit',
+  bench: 'bench',
 };
 
 function filterSkillBodyForMode(body, mode) {
@@ -41,6 +50,24 @@ function filterSkillBodyForMode(body, mode) {
       return true;
     })
     .join('\n');
+}
+
+function getCoopInstructions(yuuka) {
+  if (!yuuka || !yuuka.found) return '';
+  const status = yuuka.active
+    ? 'Yuuka is ACTIVE right now at level ' + (YUUKA_LABEL[yuuka.active] || yuuka.active) + '.'
+    : 'Yuuka is installed (' + yuuka.sources.join(', ') + ') but not active right now; ' +
+      'these rules apply whenever she is.';
+  return '## CO-OP WITH YUUKA (yuuka-skill detected)\n\n' +
+    status + ' The two Millennium girls split the work:\n\n' +
+    '- Koyuki owns broken: failing tests for an unexpected reason, crashes, opaque errors -> the crack ladder ' +
+    '(read -> repro -> bet -> probe -> prove).\n' +
+    '- Yuuka owns cost: allocations, element types, length checks, signatures, goals, benchmarks -> her kanpeki ledger.\n' +
+    '- Handoff Yuuka -> Koyuki: when Yuuka\'s red test fails for a reason other than the one she wrote it for, ' +
+    'Koyuki cracks it first; Yuuka resumes the ledger once it is green.\n' +
+    '- Handoff Koyuki -> Yuuka: once a crack is proven, Yuuka audits the fix for new allocations/copies before ' +
+    'the books are closed.\n' +
+    '- One voice per beat — never both personas on the same line. Both "never" lists apply at all times.';
 }
 
 function getFallbackInstructions(mode) {
@@ -76,26 +103,29 @@ function getFallbackInstructions(mode) {
     'Level persists until changed or session end.';
 }
 
-function getKoyukiInstructions(mode) {
+function getKoyukiInstructions(mode, { yuuka } = {}) {
   const configuredMode = normalizePersistedMode(mode) || DEFAULT_MODE;
+  const coop = getCoopInstructions(yuuka);
+  const withCoop = (text) => (coop ? text + '\n\n' + coop : text);
 
   if (INDEPENDENT_MODES.has(configuredMode)) {
-    return 'KOYUKI MODE ACTIVE — level: ' + configuredMode + '. Behavior defined by /koyuki-' + configuredMode + ' skill.';
+    return withCoop('KOYUKI MODE ACTIVE — level: ' + configuredMode + '. Behavior defined by /koyuki-' + configuredMode + ' skill.');
   }
 
   const effectiveMode = normalizeMode(configuredMode) || DEFAULT_MODE;
   const friendly = LABEL[effectiveMode] || effectiveMode;
 
   try {
-    return 'KOYUKI MODE ACTIVE — level: ' + friendly + ' (' + effectiveMode + ')\n\n' +
-      filterSkillBodyForMode(fs.readFileSync(SKILL_PATH, 'utf8'), effectiveMode);
+    return withCoop('KOYUKI MODE ACTIVE — level: ' + friendly + ' (' + effectiveMode + ')\n\n' +
+      filterSkillBodyForMode(fs.readFileSync(SKILL_PATH, 'utf8'), effectiveMode));
   } catch (e) {
-    return getFallbackInstructions(effectiveMode);
+    return withCoop(getFallbackInstructions(effectiveMode));
   }
 }
 
 module.exports = {
   filterSkillBodyForMode,
+  getCoopInstructions,
   getFallbackInstructions,
   getKoyukiInstructions,
 };

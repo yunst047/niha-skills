@@ -3,12 +3,14 @@
 //
 // Runs on every session start:
 //   1. Writes flag file at ~/.claude/.koyuki-active (statusline reads this)
-//   2. Emits the Koyuki persona ruleset as hidden SessionStart context
+//   2. Emits the Koyuki persona ruleset as hidden SessionStart context,
+//      plus the co-op contract if Yuuka (yuuka-skill) is on the machine
 //   3. Detects missing statusline config and emits a setup nudge
 
 const fs = require('fs');
 const path = require('path');
 const { getDefaultMode, getClaudeDir } = require('./koyuki-config');
+const { detectYuuka } = require('./koyuki-detect');
 const { getKoyukiInstructions } = require('./koyuki-instructions');
 const {
   clearMode,
@@ -37,7 +39,13 @@ try {
 }
 
 // 2. Emit the Koyuki ruleset, filtered to the active intensity level.
-let output = getKoyukiInstructions(mode);
+let yuuka = { found: false, active: null, sources: [] };
+try {
+  yuuka = detectYuuka({ claudeDir, cwd: process.cwd() });
+} catch (e) {
+  // Silent fail — co-op is a bonus, never a blocker
+}
+let output = getKoyukiInstructions(mode, { yuuka });
 
 // 3. Detect missing statusline config — nudge Claude to help set it up
 if (!isCodex) try {
