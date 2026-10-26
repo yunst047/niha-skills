@@ -1,11 +1,12 @@
 {
   "name": "koyuki",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Kurosaki Koyuki mode — the pink-gremlin debugger that cracks what's stuck. Claude Code plugin + npm installer for any repo.",
   "bin": {
     "koyuki-install": "bin/koyuki-install.js"
   },
   "scripts": {
+    "test": "node --test",
     "bench": "node benchmarks/measure-prompt-tax.js",
     "install-into": "node bin/koyuki-install.js"
   },

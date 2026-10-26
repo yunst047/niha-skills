@@ -37,9 +37,13 @@ function hookCmds(script) {
   };
 }
 
-// Tag so we can find/replace only our own entries on re-install / uninstall.
-const MARK = 'koyuki-';
-const isOurs = (h) => JSON.stringify(h).includes(MARK);
+// Our hook script names — find/replace only our own entries on re-install /
+// uninstall (a bare 'koyuki-' could match an unrelated hook whose path has it).
+const MARK = /koyuki-(activate|mode-tracker)\.js/;
+const isOurs = (h) => MARK.test(JSON.stringify(h));
+// Only koyuki* skills/commands are ours — a co-installed Yuuka keeps hers.
+const isOurEntry = (name) => name === 'koyuki' || name.startsWith('koyuki-') ||
+  name === 'koyuki.md' || /^koyuki-[\w-]+\.md$/.test(name);
 
 function readSettings() {
   try { return JSON.parse(fs.readFileSync(settingsPath, 'utf8')); }
@@ -57,33 +61,43 @@ function stripOurHooks(settings) {
   return settings;
 }
 
-function copyDir(name) {
+function copyOurs(name) {
   const src = path.join(pluginRoot, name);
   const dest = path.join(claudeDir, name);
-  fs.rmSync(dest, { recursive: true, force: true });
-  fs.cpSync(src, dest, { recursive: true });
+  fs.mkdirSync(dest, { recursive: true });
+  for (const entry of fs.readdirSync(src)) {
+    if (!isOurEntry(entry)) continue;
+    fs.rmSync(path.join(dest, entry), { recursive: true, force: true });
+    fs.cpSync(path.join(src, entry), path.join(dest, entry), { recursive: true });
+  }
 }
 
-function rmDir(name) {
-  fs.rmSync(path.join(claudeDir, name), { recursive: true, force: true });
+// Remove only our entries from .claude/<name>; drop the dir if we leave it empty.
+function rmOurs(name) {
+  const dir = path.join(claudeDir, name);
+  if (!fs.existsSync(dir)) return;
+  for (const entry of fs.readdirSync(dir)) {
+    if (isOurEntry(entry)) fs.rmSync(path.join(dir, entry), { recursive: true, force: true });
+  }
+  if (fs.readdirSync(dir).length === 0) fs.rmdirSync(dir);
 }
 
 if (uninstall) {
-  rmDir('skills');
-  rmDir('commands');
+  rmOurs('skills');
+  rmOurs('commands');
   if (fs.existsSync(settingsPath)) {
     const settings = stripOurHooks(readSettings());
     fs.writeFileSync(settingsPath, JSON.stringify(settings, null, 2) + '\n');
   }
   console.log('Koyuki uninstalled from ' + target);
-  console.log('(removed .claude/skills, .claude/commands, and koyuki hooks from settings.json)');
+  console.log('(removed koyuki skills/commands and koyuki hooks from settings.json; nothing else touched)');
   process.exit(0);
 }
 
 // --- install ---
 fs.mkdirSync(claudeDir, { recursive: true });
-copyDir('skills');
-copyDir('commands');
+copyOurs('skills');
+copyOurs('commands');
 
 const settings = stripOurHooks(readSettings());
 settings.hooks = settings.hooks || {};
